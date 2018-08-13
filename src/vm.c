@@ -81,7 +81,7 @@ int vm_run(VM *vm) {
                 vm_prev(vm);
                 break;
             case '[':
-                vm_start_loop(vm);
+                running = vm_start_loop(vm);
                 break;
             case ']':
                 running = vm_end_loop(vm);

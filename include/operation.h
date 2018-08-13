@@ -25,7 +25,7 @@ void vm_inc(VM *);
 void vm_dec(VM *);
 void vm_prev(VM *);
 void vm_next(VM *);
-void vm_start_loop(VM *);
+int vm_start_loop(VM *);
 int vm_end_loop(VM *);
 void vm_getc(VM *);
 void vm_putc(VM *);

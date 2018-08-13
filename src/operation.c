@@ -43,32 +43,52 @@ void vm_getc(VM *vm) {
 }
 
 void vm_putc(VM *vm) {
-    //fputc(*(vm->dp), stdout);
-    fprintf(stdout, "%d", *(vm->dp));
+    fputc(*(vm->dp), stdout);
     fflush(stdout);
 }
 
-void vm_start_loop(VM *vm) {
-    // TODO
-    if (*(vm->dp)) {
+int vm_start_loop(VM *vm) {
+    if (*(vm->dp) != 0) {
         vm->loop_num++;
     } else {
-        while (*(vm->ip) != ']') {
+        int n = 1;
+
+        while (n > 0 && *(vm->ip) != '\0') {
             vm->ip++;
+
+            if (*(vm->ip) == '\0') {
+                errno = ERR_INVAILD_LOOP;
+                return VM_STOP;
+            } else if (*(vm->ip) == '[') {
+                n++;
+            } else if (*(vm->ip) == ']') {
+                n--;
+            }
         }
     }
+
+    return VM_RUNNING;
 }
 
 int vm_end_loop(VM *vm) {
-    //TODO
     if (vm->loop_num <= 0) {
         errno = ERR_VM_LOOP;
         return VM_STOP;
     }
     
     if (*(vm->dp) != 0) {
-        while (*(vm->ip) != '[') {
+        int n = 1;
+        while (n > 0) {
             vm->ip--;
+
+            if (*(vm->ip) == '\0') {
+                errno = ERR_INVAILD_LOOP;
+                return VM_STOP;
+            } else if (*(vm->ip) == ']') {
+                n++;
+            } else if (*(vm->ip) == '[') {
+                n--;
+            }
         }
     } else {
         vm->loop_num--;

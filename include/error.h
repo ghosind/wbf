@@ -25,6 +25,7 @@
 #define ERR_VM_OVERFLOW            0x00000004   // overflow
 #define ERR_VM_LOOP                0x00000005
 #define ERR_TOO_LONG_CODE          0x00000006
+#define ERR_INVAILD_LOOP           0x00000007
 
 void print_error(void);
 
