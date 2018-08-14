@@ -30,7 +30,6 @@ void input_prompt(VM *vm) {
     do {
         fprintf(stdout, "\n> ");
         int n = fscanf(stdin, "%s", buffer);
-
         fflush(stdin);
 
         if (n > 0) {

@@ -39,7 +39,11 @@ void vm_next(VM *vm) {
 }
 
 void vm_getc(VM *vm) {
-    *(vm->dp) = fgetc(stdin);
+    int c = 0;
+    do {
+        c = fgetc(stdin);
+    } while (c == '\n');
+    *(vm->dp) = c;
 }
 
 void vm_putc(VM *vm) {
