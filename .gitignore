@@ -50,3 +50,15 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Distribution directory
+dist/
+
+# Object directory
+obj/
+
+# Mac OS
+.DS_Store
+
+# IDE
+.vscode
