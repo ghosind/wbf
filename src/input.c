@@ -17,8 +17,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 
 #include <input.h>
 #include <preprocess.h>
@@ -26,14 +28,20 @@
 
 void input_prompt(VM *vm) {
     while (1) {
+        // read input
         char *buffer = readline("> ");
 
         if (!buffer) {
             break;
         }
 
+        add_history(buffer);
+
         code_preprocess(buffer);
+
         strcpy(vm->cs, buffer);
+        free(buffer);
+
         vm_run(vm);
         vm_reset(vm);
         fprintf(stdout, "\n");
