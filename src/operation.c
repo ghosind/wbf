@@ -1,7 +1,7 @@
 /**
  * wbf - A brainfuck interpreter
  * Copyright (C) 2018, Chen Su <ghosind@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -61,7 +61,7 @@ int vm_start_loop(VM *vm) {
             vm->ip++;
 
             if (*(vm->ip) == '\0') {
-                errno = ERR_INVAILD_LOOP;
+                errno = ERR_INVALID_LOOP;
                 return VM_STOP;
             } else if (*(vm->ip) == '[') {
                 n++;
@@ -79,14 +79,14 @@ int vm_end_loop(VM *vm) {
         errno = ERR_VM_LOOP;
         return VM_STOP;
     }
-    
+
     if (*(vm->dp) != 0) {
         int n = 1;
         while (n > 0) {
             vm->ip--;
 
             if (*(vm->ip) == '\0') {
-                errno = ERR_INVAILD_LOOP;
+                errno = ERR_INVALID_LOOP;
                 return VM_STOP;
             } else if (*(vm->ip) == ']') {
                 n++;

@@ -1,7 +1,7 @@
 /**
  * wbf - A brainfuck interpreter
  * Copyright (C) 2018, Chen Su <ghosind@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -25,7 +25,7 @@
 #define ERR_VM_OVERFLOW            0x00000004   // overflow
 #define ERR_VM_LOOP                0x00000005
 #define ERR_TOO_LONG_CODE          0x00000006
-#define ERR_INVAILD_LOOP           0x00000007
+#define ERR_INVALID_LOOP           0x00000007
 
 void print_error(void);
 
