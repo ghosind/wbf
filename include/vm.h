@@ -29,7 +29,8 @@
 
 /**
  * VM memory size = code segment size + data segment size + reserved size * 3.
- * Default code segment and data segment size are 1 Kilobytes, and default memory size is 7 Kilobytes.
+ * Default code segment and data segment size are 1 Kilobytes, and default
+ * memory size is 7 Kilobytes.
  * 
  * VM structure:
  * |---------------|

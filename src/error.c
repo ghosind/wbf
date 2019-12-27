@@ -22,12 +22,12 @@
 #include <error.h>
 
 char *error_messages[] = {
-    "",
-    "",
-    "",
-    ""
+  "",
+  "",
+  "",
+  ""
 };
 
 void print_error(void) {
-    fprintf(stderr, "%s\n", error_messages[errno]);
+  fprintf(stderr, "%s\n", error_messages[errno]);
 }

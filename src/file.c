@@ -26,32 +26,32 @@
 #include <vm.h>
 
 int read_file(VM *vm, char *path) {
-    FILE *file = fopen(path, "r");
-    char buffer[FILE_BUFFER_SIZE];
+  FILE *file = fopen(path, "r");
+  char buffer[FILE_BUFFER_SIZE];
 
-    while (!feof(file)) {
-        fread(buffer, sizeof(char), FILE_SIZE_PEER_READ, file);
-    }
+  while (!feof(file)) {
+    fread(buffer, sizeof(char), FILE_SIZE_PEER_READ, file);
+  }
 
-    // pre-process code
-    code_preprocess(buffer);
+  // pre-process code
+  code_preprocess(buffer);
 
-    int len = strlen(buffer);
+  int len = strlen(buffer);
 
-    // code length must less than code segment size
-    if (len > vm->cs_size) {
-        errno = ERR_TOO_LONG_CODE;   
-        return -1;
-    }
+  // code length must less than code segment size
+  if (len > vm->cs_size) {
+    errno = ERR_TOO_LONG_CODE;   
+    return -1;
+  }
 
-    // copy code to vm
-    strcpy(vm->cs, buffer);
+  // copy code to vm
+  strcpy(vm->cs, buffer);
 
-    return 0;
+  return 0;
 }
 
 void run_with_file(VM *vm, char *path) {
-    if (read_file(vm, path) == 0) {
-        vm_run(vm);
-    }
+  if (read_file(vm, path) == 0) {
+    vm_run(vm);
+  }
 }

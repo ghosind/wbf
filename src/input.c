@@ -27,30 +27,30 @@
 #include <vm.h>
 
 void input_prompt(VM *vm) {
-    while (1) {
-        // read input
-        char *buffer = readline("> ");
+  while (1) {
+    // read input
+    char *buffer = readline("> ");
 
-        if (!buffer) {
-            break;
-        }
-
-        add_history(buffer);
-
-        code_preprocess(buffer);
-
-        if (strlen(buffer) > 0) {
-            strcpy(vm->cs, buffer);
-
-            vm_run(vm);
-            vm_reset(vm);
-            fprintf(stdout, "\n");
-        }
-
-        free(buffer);
+    if (!buffer) {
+        break;
     }
+
+    add_history(buffer);
+
+    code_preprocess(buffer);
+
+    if (strlen(buffer) > 0) {
+      strcpy(vm->cs, buffer);
+
+      vm_run(vm);
+      vm_reset(vm);
+      fprintf(stdout, "\n");
+    }
+
+    free(buffer);
+  }
 }
 
 void run_with_prompt(VM *vm) {
-    input_prompt(vm);
+  input_prompt(vm);
 }

@@ -19,24 +19,25 @@
 #include <preprocess.h>
 
 void code_preprocess(char *code) {
-    char *ptr = code;
+  char *ptr = code;
 
-    while (*code) {
-        switch (*code) {
-            case '+':
-            case '-':
-            case '<':
-            case '>':
-            case '[':
-            case ']':
-            case ',':
-            case '.':
-                *ptr = *code;
-                ptr++;
-            default:
-                code++;
-        }
+  while (*code) {
+    switch (*code) {
+      case '+':
+      case '-':
+      case '<':
+      case '>':
+      case '[':
+      case ']':
+      case ',':
+      case '.':
+        *ptr = *code;
+        ptr++;
+      default:
+        code++;
+        break;
     }
+  }
 
-    *ptr = '\0';
+  *ptr = '\0';
 }

@@ -23,80 +23,81 @@
 #include <vm.h>
 
 void vm_inc(VM *vm) {
-    *(vm->dp) = *(vm->dp) + 1;
+  *(vm->dp) = *(vm->dp) + 1;
 }
 
 void vm_dec(VM *vm) {
-    *(vm->dp) = *(vm->dp) - 1;
+  *(vm->dp) = *(vm->dp) - 1;
 }
 
 void vm_prev(VM *vm) {
-    vm->dp--;
+  vm->dp--;
 }
 
 void vm_next(VM *vm) {
-    vm->dp++;
+  vm->dp++;
 }
 
 void vm_getc(VM *vm) {
-    int c = 0;
-    do {
-        c = fgetc(stdin);
-    } while (c == '\n');
-    *(vm->dp) = c;
+  int c = 0;
+  do {
+    c = fgetc(stdin);
+  } while (c == '\n');
+
+  *(vm->dp) = c;
 }
 
 void vm_putc(VM *vm) {
-    fputc(*(vm->dp), stdout);
-    fflush(stdout);
+  fputc(*(vm->dp), stdout);
+  fflush(stdout);
 }
 
 int vm_start_loop(VM *vm) {
-    if (*(vm->dp) != 0) {
-        vm->loop_num++;
-    } else {
-        int n = 1;
+  if (*(vm->dp) != 0) {
+    vm->loop_num++;
+  } else {
+    int n = 1;
 
-        while (n > 0 && *(vm->ip) != '\0') {
-            vm->ip++;
+    while (n > 0 && *(vm->ip) != '\0') {
+      vm->ip++;
 
-            if (*(vm->ip) == '\0') {
-                errno = ERR_INVALID_LOOP;
-                return VM_STOP;
-            } else if (*(vm->ip) == '[') {
-                n++;
-            } else if (*(vm->ip) == ']') {
-                n--;
-            }
-        }
+      if (*(vm->ip) == '\0') {
+        errno = ERR_INVALID_LOOP;
+        return VM_STOP;
+      } else if (*(vm->ip) == '[') {
+        n++;
+      } else if (*(vm->ip) == ']') {
+        n--;
+      }
     }
+  }
 
-    return VM_RUNNING;
+  return VM_RUNNING;
 }
 
 int vm_end_loop(VM *vm) {
-    if (vm->loop_num <= 0) {
-        errno = ERR_VM_LOOP;
+  if (vm->loop_num <= 0) {
+    errno = ERR_VM_LOOP;
+    return VM_STOP;
+  }
+
+  if (*(vm->dp) != 0) {
+    int n = 1;
+    while (n > 0) {
+      vm->ip--;
+
+      if (*(vm->ip) == '\0') {
+        errno = ERR_INVALID_LOOP;
         return VM_STOP;
+      } else if (*(vm->ip) == ']') {
+        n++;
+      } else if (*(vm->ip) == '[') {
+        n--;
+      }
     }
+  } else {
+    vm->loop_num--;
+  }
 
-    if (*(vm->dp) != 0) {
-        int n = 1;
-        while (n > 0) {
-            vm->ip--;
-
-            if (*(vm->ip) == '\0') {
-                errno = ERR_INVALID_LOOP;
-                return VM_STOP;
-            } else if (*(vm->ip) == ']') {
-                n++;
-            } else if (*(vm->ip) == '[') {
-                n--;
-            }
-        }
-    } else {
-        vm->loop_num--;
-    }
-
-    return VM_RUNNING;
+  return VM_RUNNING;
 }
