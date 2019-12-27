@@ -39,12 +39,15 @@ void input_prompt(VM *vm) {
 
         code_preprocess(buffer);
 
-        strcpy(vm->cs, buffer);
-        free(buffer);
+        if (strlen(buffer) > 0) {
+            strcpy(vm->cs, buffer);
 
-        vm_run(vm);
-        vm_reset(vm);
-        fprintf(stdout, "\n");
+            vm_run(vm);
+            vm_reset(vm);
+            fprintf(stdout, "\n");
+        }
+
+        free(buffer);
     }
 }
 
