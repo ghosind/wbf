@@ -1,7 +1,7 @@
 /**
  * wbf - A brainfuck interpreter
  * Copyright (C) 2018, Chen Su <ghosind@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -18,30 +18,26 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <readline/readline.h>
 
 #include <input.h>
 #include <preprocess.h>
 #include <vm.h>
 
 void input_prompt(VM *vm) {
-    // TODO
-    char buffer[INPUT_BUFFER_SIZE];
+    while (1) {
+        char *buffer = readline("> ");
 
-    do {
-        fprintf(stdout, "\n> ");
-        int n = fscanf(stdin, "%s", buffer);
-        fflush(stdin);
-
-        if (n > 0) {
-            code_preprocess(buffer);
-
-            strcpy(vm->cs, buffer);
-            
-            vm_run(vm);
-
-            vm_reset(vm);
+        if (!buffer) {
+            break;
         }
-    } while (buffer[0] != EOF);
+
+        code_preprocess(buffer);
+        strcpy(vm->cs, buffer);
+        vm_run(vm);
+        vm_reset(vm);
+        fprintf(stdout, "\n");
+    }
 }
 
 void run_with_prompt(VM *vm) {
