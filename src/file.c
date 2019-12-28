@@ -41,6 +41,7 @@ int read_file(VM *vm, char *path) {
   // code length must less than code segment size
   if (len > vm->cs_size) {
     errno = ERR_TOO_LONG_CODE;   
+    print_error();
     return -1;
   }
 

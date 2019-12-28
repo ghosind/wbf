@@ -16,12 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#include <error.h>
 #include <input.h>
 #include <preprocess.h>
 #include <vm.h>
@@ -39,7 +41,12 @@ void input_prompt(VM *vm) {
 
     code_preprocess(buffer);
 
-    if (strlen(buffer) > 0) {
+    int len = strlen(buffer);
+
+    if (len > vm->cs_size) {
+      errno = ERR_TOO_LONG_CODE;
+      print_error();
+    } else if (len > 0) {
       strcpy(vm->cs, buffer);
 
       vm_run(vm);

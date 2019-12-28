@@ -22,12 +22,15 @@
 #include <error.h>
 
 char *error_messages[] = {
-  "",
-  "",
-  "",
-  ""
+  "Failed to initialize VM.",
+  "Failed to allocate memory.",
+  "Unknown operand.",
+  "Memory overflowed.",
+  "Invalid loop.",
+  "Commands length out of limit.",
+  "Invalid loop"
 };
 
 void print_error(void) {
-  fprintf(stderr, "%s\n", error_messages[errno]);
+  fprintf(stderr, "%s\n", error_messages[errno - 1]);
 }

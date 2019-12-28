@@ -25,7 +25,7 @@
 #include <wbf.h>
 
 /**
- * print program description and copyright infomation.
+ * Print program description and copyright information.
  */
 void print_program_info() {
   fprintf(stdout, "%s v%d.%d.%d\n", PROGRAM_NAME, MAJOR_VERSION,
@@ -39,12 +39,13 @@ void print_program_info() {
 }
 
 /**
- * print program usage.
+ * Print usage of the program.
  */
 void print_usage() {
   print_program_info();
 }
 
+// TODO: get configurations from arguments.
 int main(int argc, char **argv) {
   VM *vm = vm_init(VM_DEFAULT_CS_SIZE, VM_DEFAULT_DS_SIZE);
   

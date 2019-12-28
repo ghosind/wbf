@@ -30,12 +30,14 @@ VM *vm_init(int cs_size, int ds_size) {
   VM *vm = (VM *) malloc(sizeof(VM));
   if (!vm) {
     errno = ERR_VM_INIT_ERROR;
+    print_error();
     return NULL;
   }
 
   vm->mem = (char *) malloc(vm_size);
   if (!vm->mem) {
     errno = ERR_VM_MEM_INIT_ERROR;
+    print_error();
     return NULL;
   }
 
@@ -94,6 +96,7 @@ int vm_run(VM *vm) {
         break;
       default:
         errno = ERR_VM_UNKNOWN_INSTRUCTION;
+        print_error();
         running = VM_STOP;
         break;
     }
@@ -102,6 +105,7 @@ int vm_run(VM *vm) {
 
     if (vm->ip > vm->mem + vm->mem_size) {
       errno = ERR_VM_OVERFLOW;
+      print_error();
     }
   }
 
