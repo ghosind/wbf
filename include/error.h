@@ -23,7 +23,7 @@
 #define ERR_VM_MEM_INIT_ERROR      0x00000002   // allocate memory error
 #define ERR_VM_UNKNOWN_INSTRUCTION 0x00000003   // unknown instruction
 #define ERR_VM_OVERFLOW            0x00000004   // overflow
-#define ERR_VM_LOOP                0x00000005
+#define ERR_INVALID_FILE           0x00000005
 #define ERR_TOO_LONG_CODE          0x00000006
 #define ERR_INVALID_LOOP           0x00000007
 

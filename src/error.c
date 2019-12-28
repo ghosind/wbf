@@ -26,7 +26,7 @@ char *error_messages[] = {
   "Failed to allocate memory.",
   "Unknown operand.",
   "Memory overflowed.",
-  "Invalid loop.",
+  "Invalid file.",
   "Commands length out of limit.",
   "Invalid loop"
 };

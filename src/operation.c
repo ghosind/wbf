@@ -78,7 +78,7 @@ int vm_start_loop(VM *vm) {
 
 int vm_end_loop(VM *vm) {
   if (vm->loop_num <= 0) {
-    errno = ERR_VM_LOOP;
+    errno = ERR_INVALID_LOOP;
     print_error();
     return VM_STOP;
   }

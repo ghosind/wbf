@@ -29,6 +29,12 @@ int read_file(VM *vm, char *path) {
   FILE *file = fopen(path, "r");
   char buffer[FILE_BUFFER_SIZE];
 
+  if (!file) {
+    errno = ERR_INVALID_FILE;
+    print_error();
+    return ERR_INVALID_FILE;
+  }
+
   while (!feof(file)) {
     fread(buffer, sizeof(char), FILE_SIZE_PEER_READ, file);
   }
@@ -42,7 +48,7 @@ int read_file(VM *vm, char *path) {
   if (len > vm->cs_size) {
     errno = ERR_TOO_LONG_CODE;   
     print_error();
-    return -1;
+    return ERR_TOO_LONG_CODE;
   }
 
   // copy code to vm
