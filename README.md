@@ -38,6 +38,27 @@ Just run `make`, and it will generate binary file `wbf` to the `dist` directory.
 $ wbf [file_name]
 ```
 
+## Commands
+
+| Command | Description |
+| :-----: | :---------: |
+|   `<`   |	Move the pointer to the previous position |
+|   `>`   | Move the pointer to the next position |
+|   `+`   | Increment the memory cell under the pointer |
+|   `-`   | Decrement the memory cell under the pointer |
+|   `.`   | Print the character signified by the memory cell at the pointer |
+|   `,`   | Read a character and store it in the memory cell at the pointer |
+|   `[`   | Jump past the matching `]` if the memory cell at the pointer is zero |
+|   `]`   | Jump back to the matching `[` if the memory cell at the pointer is nonzero |
+
+## Example
+
+The program prints the word: Hello World!
+
+```bf
+++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
+```
+
 ## Contribution
 
 1. Fork the Project.
