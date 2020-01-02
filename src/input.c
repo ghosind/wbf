@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <ctype.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +29,14 @@
 #include <preprocess.h>
 #include <vm.h>
 
+int is_not_blank(char *str) {
+  while (*str && isblank(*str)) {
+    str++;
+  }
+
+  return *str && !isblank(*str);
+}
+
 void input_prompt(VM *vm) {
   while (1) {
     // read input
@@ -37,7 +46,9 @@ void input_prompt(VM *vm) {
         break;
     }
 
-    add_history(buffer);
+    if (is_not_blank(buffer)) {
+      add_history(buffer);
+    }
 
     code_preprocess(buffer);
 
@@ -51,6 +62,7 @@ void input_prompt(VM *vm) {
 
       vm_run(vm);
       vm_reset(vm);
+      
       fprintf(stdout, "\n");
     }
 
