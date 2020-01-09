@@ -25,6 +25,10 @@
 #include <operation.h>
 #include <vm.h>
 
+#ifndef __APPLE__
+#include <stdio_ext.h>
+#endif
+
 VM *vm_init(int cs_size, int ds_size) {
   int vm_size = cs_size + ds_size * sizeof(int) + VM_RESERVED_SIZE * 3;
 
@@ -66,7 +70,11 @@ void vm_reset(VM *vm) {
 
   vm->loop_num = 0;
 
+#ifdef __APPLE__
   fpurge(stdin);
+#else
+  __fpurge(stdin);
+#endif
 }
 
 int vm_run(VM *vm) {
