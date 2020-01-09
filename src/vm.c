@@ -25,7 +25,7 @@
 #include <vm.h>
 
 VM *vm_init(int cs_size, int ds_size) {
-  int vm_size = cs_size + ds_size + VM_RESERVED_SIZE * 3;
+  int vm_size = cs_size + ds_size * sizeof(int) + VM_RESERVED_SIZE * 3;
 
   VM *vm = (VM *) malloc(sizeof(VM));
   if (!vm) {
@@ -43,8 +43,9 @@ VM *vm_init(int cs_size, int ds_size) {
 
   memset(vm->mem, 0, vm_size);
 
-  vm->ds = vm->dp = vm->mem + VM_RESERVED_SIZE;
-  vm->cs = vm->ip = vm->ds + ds_size + VM_RESERVED_SIZE;
+  vm->ds = vm->mem + VM_RESERVED_SIZE;
+  vm->dp = (int *) vm->ds;
+  vm->cs = vm->ip = vm->ds + ds_size * sizeof(int) + VM_RESERVED_SIZE;
 
   vm->mem_size = vm_size;
   vm->cs_size = cs_size;
@@ -60,7 +61,7 @@ void vm_reset(VM *vm) {
   memset(vm->mem, 0, vm->mem_size);
 
   vm->ip = vm->cs;
-  vm->dp = vm->ds;
+  vm->dp = (int *) vm->ds;
 
   vm->loop_num = 0;
 }

@@ -18,6 +18,7 @@
 
 #include <errno.h>
 #include <stdio.h>
+#include <wchar.h>
 
 #include <error.h>
 #include <vm.h>
@@ -41,14 +42,14 @@ void vm_next(VM *vm) {
 void vm_getc(VM *vm) {
   int c = 0;
   do {
-    c = fgetc(stdin);
+    c = fgetwc(stdin);
   } while (c == '\n');
 
   *(vm->dp) = c;
 }
 
 void vm_putc(VM *vm) {
-  fputc(*(vm->dp), stdout);
+  fputwc(*(vm->dp), stdout);
   fflush(stdout);
 }
 
