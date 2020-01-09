@@ -40,12 +40,7 @@ void vm_next(VM *vm) {
 }
 
 void vm_getc(VM *vm) {
-  int c = 0;
-  do {
-    c = fgetwc(stdin);
-  } while (c == '\n');
-
-  *(vm->dp) = c;
+  *(vm->dp) = fgetwc(stdin);
 }
 
 void vm_putc(VM *vm) {

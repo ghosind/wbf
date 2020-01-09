@@ -17,6 +17,7 @@
  */
 
 #include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -64,6 +65,8 @@ void vm_reset(VM *vm) {
   vm->dp = (int *) vm->ds;
 
   vm->loop_num = 0;
+
+  fpurge(stdin);
 }
 
 int vm_run(VM *vm) {
