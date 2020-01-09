@@ -23,9 +23,9 @@
 #define VM_RUNNING 1
 #define VM_STOP    0
 
-#define VM_RESERVED_SIZE    0x400
-#define VM_DEFAULT_CS_SIZE  0x400
-#define VM_DEFAULT_DS_SIZE  0x400
+#define VM_RESERVED_SIZE    0x00400
+#define VM_DEFAULT_CS_SIZE  0x10000
+#define VM_DEFAULT_DS_SIZE  0x10000
 
 /**
  * VM memory size = code segment size + data segment size + reserved size * 3.

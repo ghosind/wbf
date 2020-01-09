@@ -21,8 +21,8 @@
 
 #include <vm.h>
 
-#define FILE_BUFFER_SIZE 0x00100000     // 1 Megabytes
-#define FILE_SIZE_PEER_READ 0x00000400  // 1 Kilobytes
+#define FILE_BUFFER_SIZE 0x00010000     // 1 Megabytes
+#define FILE_SIZE_PEER_READ 0x00010000  // 1 Kilobytes
 
 void run_with_file(VM *, char *);
 int read_file(VM *, char *);
