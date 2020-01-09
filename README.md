@@ -53,7 +53,7 @@ $ wbf [file_name]
 
 ## Example
 
-The program prints the word: Hello World!
+The program prints the word: Hello World! 
 
 ```bf
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
@@ -70,3 +70,7 @@ The program prints the word: Hello World!
 ## License
 
 Distributed under the GPLv3 License. See [LICENSE](./LICENSE) for more information.
+
+## Credits
+
+- [https://esolangs.org/wiki/Brainfuck](https://esolangs.org/wiki/Brainfuck)
