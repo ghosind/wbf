@@ -20,9 +20,22 @@
 
 void code_preprocess(char *code) {
   char *ptr = code;
+  int inComment = 0;
 
   while (*code) {
+    if (inComment) {
+      if (*code == '\n') {
+        inComment = 0;
+      }
+      code++;
+      continue;
+    }
+
     switch (*code) {
+      case '#':
+        inComment = 1;
+        code++;
+        break;
       case '+':
       case '-':
       case '<':
