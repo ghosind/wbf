@@ -50,7 +50,7 @@ typedef struct {
     char *cs;       // code segments pointer
     char *ds;       // data segments pointer
     char *ip;       // instruction pointer
-    int *dp;       // data pointer
+    char *dp;       // data pointer
     int mem_size;
     int cs_size;
     int ds_size;
