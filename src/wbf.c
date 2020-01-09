@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include <file.h>
 #include <input.h>
@@ -28,9 +29,14 @@
  * Print program description and copyright information.
  */
 void print_program_info() {
+  time_t now_time = time(NULL);
+  struct tm *now = localtime(&now_time);
+
   fprintf(stdout, "%s v%d.%d.%d\n", PROGRAM_NAME, MAJOR_VERSION,
       MINOR_VERSION, PATCH_VERSION);
-  fprintf(stdout, "Copyright (C) 2018, %s\n\n", PROGRAM_AUTHOR);
+  fprintf(stdout, "Copyright (C) 2018 - %d, %s\n\n",
+      now->tm_year + 1900,
+      PROGRAM_AUTHOR);
   fprintf(stdout, "This program comes with ABSOLUTELY NO WARRANTY.\n");
   fprintf(stdout,
       "This is free software, and you are welcome to redistribute it\n");
