@@ -32,8 +32,9 @@ void print_program_info() {
   time_t now_time = time(NULL);
   struct tm *now = localtime(&now_time);
 
-  fprintf(stdout, "%s v%d.%d.%d\n", PROGRAM_NAME, MAJOR_VERSION,
+  fprintf(stdout, "%s - v%d.%d.%d\n", PROGRAM_NAME, MAJOR_VERSION,
       MINOR_VERSION, PATCH_VERSION);
+  fprintf(stdout, "%s\n", PROGRAM_DESCRIPTION);
   fprintf(stdout, "Copyright (C) 2018 - %d, %s\n\n",
       now->tm_year + 1900,
       PROGRAM_AUTHOR);

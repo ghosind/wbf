@@ -22,6 +22,8 @@
 #define PROGRAM_NAME "wbf"
 #define PROGRAM_AUTHOR "Chen Su"
 
+#define PROGRAM_DESCRIPTION "A simple Brainfuck language interpreter."
+
 #define MAJOR_VERSION 0
 #define MINOR_VERSION 0
 #define PATCH_VERSION 2
