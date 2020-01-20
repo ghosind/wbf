@@ -18,6 +18,8 @@
 
 #include <ctype.h>
 #include <errno.h>
+#include <setjmp.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,6 +31,9 @@
 #include <preprocess.h>
 #include <vm.h>
 
+static int keep_running = 1;
+sigjmp_buf ctrlc_buf;
+
 int is_not_blank(char *str) {
   while (*str && isblank(*str)) {
     str++;
@@ -37,13 +42,34 @@ int is_not_blank(char *str) {
   return *str && !isblank(*str);
 }
 
+void int_handler(int signo) {
+  if (signo != SIGINT) {
+    return;
+  }
+
+  if (keep_running) {
+    keep_running = 0;
+    fprintf(stdout, "\nPress CTRL-C again to exit.\n> ");
+    fflush(stdout);
+  } else {
+    exit(0);
+  }
+}
+
 void input_prompt(VM *vm) {
+  if (signal(SIGINT, int_handler) == SIG_ERR) {
+    fprintf(stderr, "Failed to regsiter interrupt.");
+  }
+
   while (1) {
+    while (sigsetjmp(ctrlc_buf, 1) != 0) {}
+
     // read input
     char *buffer = readline("> ");
+    keep_running = 1;
 
     if (!buffer) {
-        break;
+      break;
     }
 
     if (is_not_blank(buffer)) {
