@@ -1,6 +1,7 @@
 # wbf
 
 ![Travis CI](https://travis-ci.org/ghosind/wbf.svg?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a598d95b481b40b186098092e71f38e4)](https://www.codacy.com/manual/ghosind/wbf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ghosind/wbf&amp;utm_campaign=Badge_Grade)
 
 A simple BrainFuck language interpreter.
 
@@ -10,7 +11,7 @@ A simple BrainFuck language interpreter.
 
 Wbf require readline library, you should install libreadline before build it.
 
-For Mac OS: 
+For Mac OS:
 
 ```sh
 $ brew install readline
@@ -53,7 +54,7 @@ $ wbf [file_name]
 
 ## Example
 
-The program prints the word: Hello World! 
+The program prints the word: Hello World!
 
 ```bf
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
