@@ -1,7 +1,7 @@
 /**
  * wbf - A brainfuck interpreter
  * Copyright (C) 2018, Chen Su <ghosind@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -42,17 +42,17 @@ int read_file(VM *vm, char *path) {
   // pre-process code
   code_preprocess(buffer);
 
-  int len = strlen(buffer);
+  size_t len = strlen(buffer);
 
   // code length must less than code segment size
   if (len > vm->cs_size) {
-    errno = ERR_TOO_LONG_CODE;   
+    errno = ERR_TOO_LONG_CODE;
     print_error();
     return ERR_TOO_LONG_CODE;
   }
 
   // copy code to vm
-  strcpy(vm->cs, buffer);
+  snprintf(vm->cs, len + 1, "%s", buffer);
 
   return 0;
 }

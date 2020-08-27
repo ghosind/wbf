@@ -78,17 +78,17 @@ void input_prompt(VM *vm) {
 
     code_preprocess(buffer);
 
-    int len = strlen(buffer);
+    size_t len = strlen(buffer);
 
     if (len > vm->cs_size) {
       errno = ERR_TOO_LONG_CODE;
       print_error();
     } else if (len > 0) {
-      strcpy(vm->cs, buffer);
+      snprintf(vm->cs, len + 1, "%s", buffer);
 
       vm_run(vm);
       vm_reset(vm);
-      
+
       fprintf(stdout, "\n");
     }
 
