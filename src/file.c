@@ -19,15 +19,29 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include <error.h>
 #include <file.h>
 #include <preprocess.h>
 #include <vm.h>
 
+FILE *open_file(const char *path) {
+  struct stat file_stats;
+  int ret = 0;
+
+  ret = stat(path, &file_stats);
+  if (ret || !S_ISREG(file_stats.st_mode)) {
+    return NULL;
+  }
+
+  return fopen(path, "r");
+}
+
 int read_file(VM *vm, char *path) {
-  FILE *file = fopen(path, "r");
   char buffer[FILE_BUFFER_SIZE];
+  FILE *file = open_file(path);
 
   if (!file) {
     errno = ERR_INVALID_FILE;
