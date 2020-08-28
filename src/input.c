@@ -78,7 +78,7 @@ void input_prompt(VM *vm) {
 
     code_preprocess(buffer);
 
-    size_t len = strlen(buffer);
+    size_t len = strnlen(buffer, vm->cs_size);
 
     if (len > vm->cs_size) {
       errno = ERR_TOO_LONG_CODE;

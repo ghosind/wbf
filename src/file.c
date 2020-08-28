@@ -42,7 +42,7 @@ int read_file(VM *vm, char *path) {
   // pre-process code
   code_preprocess(buffer);
 
-  size_t len = strlen(buffer);
+  size_t len = strnlen(buffer, FILE_BUFFER_SIZE);
 
   // code length must less than code segment size
   if (len > vm->cs_size) {
