@@ -123,3 +123,9 @@ int vm_run(VM *vm) {
 
   return running;
 }
+
+void vm_free(VM *vm) {
+  char *mem = vm->mem;
+  free(mem);
+  free(vm);
+}

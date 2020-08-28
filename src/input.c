@@ -32,6 +32,7 @@
 #include <vm.h>
 
 static int keep_running = 1;
+VM *glob_vm;
 sigjmp_buf ctrlc_buf;
 
 int is_not_blank(char *str) {
@@ -52,7 +53,8 @@ void int_handler(int signo) {
     fprintf(stdout, "\nPress CTRL-C again to exit.\n> ");
     fflush(stdout);
   } else {
-    exit(0);
+    vm_free(glob_vm);
+    exit(EXIT_SUCCESS);
   }
 }
 
@@ -60,6 +62,7 @@ void input_prompt(VM *vm) {
   if (signal(SIGINT, int_handler) == SIG_ERR) {
     fprintf(stderr, "Failed to regsiter interrupt.");
   }
+  glob_vm = vm;
 
   while (1) {
     while (sigsetjmp(ctrlc_buf, 1) != 0) {}

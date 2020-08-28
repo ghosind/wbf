@@ -1,7 +1,7 @@
 /**
  * wbf - A brainfuck interpreter
  * Copyright (C) 2018, Chen Su <ghosind@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -31,7 +31,7 @@
  * VM memory size = code segment size + data segment size + reserved size * 3.
  * Default code segment and data segment size are 1 Kilobytes, and default
  * memory size is 7 Kilobytes.
- * 
+ *
  * VM structure:
  * |---------------|
  * |   Reserved    |
@@ -65,5 +65,7 @@ VM *vm_init(int , int );
 void vm_reset(VM *);
 
 int vm_run(VM *);
+
+void vm_free(VM *);
 
 #endif

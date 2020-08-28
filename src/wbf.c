@@ -1,7 +1,7 @@
 /**
  * wbf - A brainfuck interpreter
  * Copyright (C) 2018, Chen Su <ghosind@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -55,7 +55,7 @@ void print_usage() {
 // TODO: get configurations from arguments.
 int main(int argc, char **argv) {
   VM *vm = vm_init(VM_DEFAULT_CS_SIZE, VM_DEFAULT_DS_SIZE);
-  
+
   if (argc == 2) {
     run_with_file(vm, argv[1]);
   } else {
@@ -63,5 +63,7 @@ int main(int argc, char **argv) {
     run_with_prompt(vm);
   }
 
-  exit(0);
+  vm_free(vm);
+
+  exit(EXIT_SUCCESS);
 }
